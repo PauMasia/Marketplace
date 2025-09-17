@@ -14,3 +14,7 @@
 - Al primer arranque se mirara la cantidad de usuarios internos, que hay generados sin contar el OdooBot de pacotilla
 en caso de no haber usuarios este te llevara a una pagina donde se creará el nuevo usuario, solo la primera vez
 
+17/9/2025
+- Tener en cuenta al borrar bd de poner restricciones, ir limitando los campos nuevos necesarios,
+      -  (res_partner)mail
+- Borrar BD
