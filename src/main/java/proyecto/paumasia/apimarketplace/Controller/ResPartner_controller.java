@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import proyecto.paumasia.apimarketplace.Entity.ResPartner;
+import proyecto.paumasia.apimarketplace.Models.ResPartnerModel;
 import proyecto.paumasia.apimarketplace.Repository.ResPartner_repository;
 
 @Controller
@@ -20,9 +21,16 @@ public class ResPartner_controller {
     }
 
     @PostMapping("/register")
-    public void resPartner(@RequestBody ResPartner resPartner){
-        resPartner.setPassword(passwordEncoder.encode(resPartner.getPassword())); //Dios que calidad
+    public String resPartner(@RequestBody ResPartnerModel resPartnerModel){
+        if resPartnerModel.getMail() ==
+        ResPartner resPartner=  new ResPartner();
+        resPartner.setMail(resPartnerModel.getMail());
+        resPartner.setUsername(resPartnerModel.getUsername());
+        resPartner.setPassword(passwordEncoder.encode(resPartnerModel.getPassword())); //Dios que calidad
         resPartnerRepository.save(resPartner);
     }
 
+    public boolean userCorrect(ResPartnerModel user){
+        if (user.getMail())
+    }
 }

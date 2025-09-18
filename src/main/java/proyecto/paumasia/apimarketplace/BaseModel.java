@@ -1,11 +1,15 @@
 package proyecto.paumasia.apimarketplace;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import proyecto.paumasia.apimarketplace.Entity.ResPartner;
 
 import java.util.Date;
 
 @MappedSuperclass
+@Getter
+@Setter
 public abstract class BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,10 +21,6 @@ public abstract class BaseModel {
 
     @Column(nullable = false)
     private Date create_date;
-
-    public ResPartner getCreate_uid() {
-        return create_uid;
-    }
 
     public void setCreate_uid(ResPartner create_uid) {
         this.create_uid = create_uid;

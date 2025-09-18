@@ -12,6 +12,8 @@
 //
 //@Entity
 //@Table(name ="res_users")
+//@Getter
+//@Setter
 //public class ResUser extends Models {
 //    @Column(nullable = false)
 //    private String username;

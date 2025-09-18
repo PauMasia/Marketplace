@@ -3,52 +3,31 @@ package proyecto.paumasia.apimarketplace.Entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import proyecto.paumasia.apimarketplace.BaseModel;
 
 @Entity
 @Table(name ="res_partner")
+@Getter
+@Setter
 public class ResPartner extends BaseModel {
     @Column(nullable = false)
+    @NotBlank
     private String username;
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    @Column(nullable = false)
+    @Column(nullable = false,unique=true)
+    @Email(message = "Email format is not correct")
     private String mail;
     //Cifrar
     @Column(nullable = false)
+    @NotBlank
     private String password;
     private String country;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
+    private String address;
 
     public ResPartner(){
         super(null);
