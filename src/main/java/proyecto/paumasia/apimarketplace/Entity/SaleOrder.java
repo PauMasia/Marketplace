@@ -27,8 +27,8 @@ public class SaleOrder extends BaseModel {
     private String amount_delivery;
     @Column(nullable = false)//Total con todo
     private String amount_total;
-    @OneToMany
-    private List<SaleOrderLine> line_ids;
+//    @OneToMany
+//    private List<SaleOrderLine> line_ids;
 
     public SaleOrder (){
         super(null);

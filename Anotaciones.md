@@ -1,8 +1,8 @@
 
 
-- Arreglar y mirar conexion base de datos -DONE
-- Probar que el tema de Models funciona corr*ectamente y no tengo que crear un id y create_uid y create_date en cada uno 
-    y lo tienen por default -DONE
+~~- Arreglar y mirar conexion base de datos -DONE~~
+~~- Probar que el tema de Models funciona corr*ectamente y no tengo que crear un id y create_uid y create_date en cada uno 
+    y lo tienen por default -DONE~~
 ~~- Posibilidad de añadir un write_uid, pero claro esto se hace en Odoo con el .write de Models y este tema es muy tedioso~~
 
 16/9/2025
@@ -20,3 +20,8 @@ en caso de no haber usuarios este te llevara a una pagina donde se creará el nu
 - Borrar BD
 
 18/9
+
+24/9
+- Acabar tema de login y probarlo Prioridad
+- Buscar mas sobre los tokens, obligatorio
+- Revisar CORS, sq no va, creo que era una configuracion de el aplicantion

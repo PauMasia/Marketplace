@@ -6,7 +6,7 @@ public class Tools {
     public static Date setDateNow(){
         return new Date();
     }
-    public static boolean mailCorrect(String mail){
-
-    }
+//    public static boolean mailCorrect(String mail){
+//
+//    }
 }
