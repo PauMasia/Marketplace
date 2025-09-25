@@ -22,6 +22,6 @@ en caso de no haber usuarios este te llevara a una pagina donde se creará el nu
 18/9
 
 24/9
-- Acabar tema de login y probarlo Prioridad
+~~- Acabar tema de register y probarlo Prioridad~~
 - Buscar mas sobre los tokens, obligatorio
-- Revisar CORS, sq no va, creo que era una configuracion de el aplicantion
+~~- Revisar CORS, sq no va, creo que era una configuracion de el aplicantion~~

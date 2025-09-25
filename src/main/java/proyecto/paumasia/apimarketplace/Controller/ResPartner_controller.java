@@ -37,7 +37,7 @@ public class ResPartner_controller {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseResPartnerModel("Jaimito no va ♥",resPartner));
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseResPartnerModel("Error 500 serveer bruh",resPartner));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseResPartnerModel(e.getMessage(),resPartner));
         }
         return ResponseEntity.ok(new ResponseResPartnerModel("Usuario registrado con exito",resPartner));
     }
