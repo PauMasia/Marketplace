@@ -20,18 +20,19 @@ public class SaleOrder extends BaseModel {
     @Column(nullable = false)
     private String location_id;
     @Column(nullable = false)//total sin impuestos
-    private String amount_untaxed;
+    private Float amount_untaxed;
     @Column(nullable = false)//impuestoa
-    private String amount_tax;
+    private Float amount_tax;
     @Column(nullable = false) //Envio
-    private String amount_delivery;
+    private Float amount_delivery;
     @Column(nullable = false)//Total con todo
-    private String amount_total;
+    private Float amount_total;
 //    @OneToMany
 //    private List<SaleOrderLine> line_ids;
 
     public SaleOrder (){
         super(null);
-
     }
+    // cOmputar todos los valores precio no nullable, either 0
+    // public
 }
