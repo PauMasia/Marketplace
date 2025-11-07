@@ -7,7 +7,10 @@ import proyecto.paumasia.apimarketplace.Entity.ResPartner;
 import java.util.Optional;
 
 @Component
-public interface ResPartner_repository extends JpaRepository<ResPartner,Long> {
+public interface ResPartnerRepository extends JpaRepository<ResPartner,Long> {
     @Override
     Optional<ResPartner> findById(Long aLong);
+
+
+    ResPartner findByMail(String mail);
 }
