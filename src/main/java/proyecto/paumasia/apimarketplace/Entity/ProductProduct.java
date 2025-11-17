@@ -16,6 +16,8 @@ public class ProductProduct extends BaseModel {
     @Column(nullable = false)
     private Float price;
     private Integer discount;
+    @Column(nullable = false)
+    private String category;
 
     public ResPartner getResponsible_id() {
         return responsible_id;

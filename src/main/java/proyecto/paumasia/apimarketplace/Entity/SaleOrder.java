@@ -15,12 +15,11 @@ import java.util.List;
 public class SaleOrder extends BaseModel {
     // Habria que ver como generar nombre como SO/p/fv~250004, deberia con un compute al crearse
     @Column(unique = true, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name; // PEJ: SO250020/ FV2600003
     @ManyToOne
     @JoinColumn(name = "partner_id", nullable = false)
     private ResPartner partner_id;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true) // Para que se borren cuando se suelten de este pedido
+    @OneToMany(mappedBy = "order_id", cascade = CascadeType.ALL, orphanRemoval = true) // Para que se borren cuando se suelten de este pedido
     private List<SaleOrderLine> line_ids;
     @Column(nullable = false)
     private String location_id;
@@ -37,7 +36,7 @@ public class SaleOrder extends BaseModel {
     public SaleOrder (){
         super(null);
         this.state = "not_payed";
-        this.name = "SO25"+ "ultimopedido";
+        this.name = "SO25"+ "00001"; //lo cambiare mas adelante
     }
     // cOmputar todos los valores precio no nullable, either 0
     // public
