@@ -28,19 +28,32 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http
+//                .csrf(csrf -> csrf.disable())
+//                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+//                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+//                        .requestMatchers("/web/register").permitAll()
+//                        .anyRequest().permitAll()
+//                )
+//                .formLogin(withDefaults())
+//                .httpBasic(withDefaults())
+//                .build();
+//    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // Desactiva CSRF
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/web/register").permitAll()
-                        .anyRequest().permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll() // PERMITIR TODO
                 )
-                .formLogin(withDefaults())
-                .httpBasic(withDefaults())
+                .formLogin(form -> form.disable()) // Desactiva login form
+                .httpBasic(basic -> basic.disable()) // Desactiva basic auth
                 .build();
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

@@ -22,6 +22,7 @@ public abstract class BaseModel {
     @Column(nullable = false)
     private Date create_date;
 
+    // Hacer funcion para detectar el usuario logeado, si esto esta bien, hacer funcion para ultima modificacion tiempo y usuario
     public void setCreate_uid(ResPartner create_uid) {
         this.create_uid = create_uid;
     }
