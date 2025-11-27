@@ -1,19 +1,12 @@
 package proyecto.paumasia.apimarketplace.Models;
 
-public class ResPartnerModel{
-    private String username;
-    private String mail;
-    private String password;
+import lombok.Getter;
+import lombok.Setter;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
+@Getter
+@Setter
+public class ResPartnerModel {
+    public String username;
+    public String mail;
+    public String password;
 }

@@ -13,4 +13,8 @@ public interface ProductProductRepository extends JpaRepository<ProductProduct, 
 
     @Override
     List<ProductProduct> findAll();
+
+    Page<ProductProduct> findByNameContainingIgnoreCase(String name, Pageable pageable);
+
+    Page<ProductProduct> findByCategoryAndNameContainingIgnoreCase(String category, String name, Pageable pageable);
 }

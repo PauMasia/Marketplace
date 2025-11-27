@@ -1,15 +1,14 @@
 package proyecto.paumasia.apimarketplace.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import proyecto.paumasia.apimarketplace.BaseModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name ="res_partner")
@@ -28,10 +27,15 @@ public class ResPartner extends BaseModel {
     private String password;
     private String country;
     private String address;
+//    @Column(nullable = false)
+//    private Boolean shared = true; // Default true a menos que lo ponga algun interno
+
+//    @OneToMany(mappedBy = "partner", fetch = FetchType.LAZY)
+//    private List<Token> tokens = new ArrayList<>();
 
     public ResPartner(){
         super(null);
-        this.country=null;
+        this.country= null;
     }
 
 

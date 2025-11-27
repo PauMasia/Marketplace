@@ -14,11 +14,11 @@ import proyecto.paumasia.apimarketplace.Repository.ResPartnerRepository;
 @Controller
 @RestController
 @RequestMapping("/web")
-public class ResPartner_controller {
+public class ResPartnerController {
     private final ResPartnerRepository resPartnerRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public ResPartner_controller(ResPartnerRepository resPartnerRepository, PasswordEncoder passwordEncoder) {
+    public ResPartnerController(ResPartnerRepository resPartnerRepository, PasswordEncoder passwordEncoder) {
         this.resPartnerRepository = resPartnerRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -45,11 +45,27 @@ public class ResPartner_controller {
     @PostMapping("/login")
     public ResponseEntity<ResponseResPartnerModel> loginUser(@RequestBody ResPartnerModel resPartnerModel){
         ResPartner resPartner = resPartnerRepository.findByMail(resPartnerModel.getMail());
+        if (resPartner == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new ResponseResPartnerModel("Usuario no encontrado", null));
+        }
+
         try {
-            resPartner.setMail(resPartnerModel.getMail());
-            resPartner.setUsername(resPartnerModel.getUsername());
-            resPartner.setPassword(passwordEncoder.encode(resPartnerModel.getPassword())); //Dios que calidad
-            resPartnerRepository.save(resPartner);
+            // Comprobar contraseña correctamente
+            if (!passwordEncoder.matches(resPartnerModel.getPassword(), resPartner.getPassword())) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ResponseResPartnerModel("Contraseña incorrecta", null));
+            }
+
+            // Generar JWT, revisar
+            // String token = jwtUtil.generateToken(resPartner.getMail());
+            //
+            // revisar
+            //
+            // return ResponseEntity.ok(
+            //         new ResponseResPartnerModel("Login correcto", resPartner, token)
+            // );
+
         }catch (ConstraintDeclarationException a){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseResPartnerModel("Jaimito no va ♥",resPartner));
         }catch (Exception e){
