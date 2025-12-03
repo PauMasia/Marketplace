@@ -19,3 +19,5 @@
 - [Tokens 2](https://www.baeldung.com/spring-security-sign-jwt-token)
 - [Tokens 3](https://www.youtube.com/watch?v=-Z4a0bKr2Pg)
 - [Redirect](https://stackoverflow.com/questions/16562577/how-can-i-make-a-button-redirect-my-page-to-another-page)
+- [Image](https://docs.expo.dev/versions/latest/sdk/image/)
+- [Variables entorno](https://docs.expo.dev/guides/environment-variables/)

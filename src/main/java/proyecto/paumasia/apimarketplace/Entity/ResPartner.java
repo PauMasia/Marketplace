@@ -27,15 +27,14 @@ public class ResPartner extends BaseModel {
     private String password;
     private String country;
     private String address;
-//    @Column(nullable = false)
-//    private Boolean shared = true; // Default true a menos que lo ponga algun interno
+    @Column(nullable = false)
+    private Boolean shared; // Default true a menos que lo ponga algun interno
 
 //    @OneToMany(mappedBy = "partner", fetch = FetchType.LAZY)
 //    private List<Token> tokens = new ArrayList<>();
 
     public ResPartner(){
         super(null);
-        this.country= null;
     }
 
 

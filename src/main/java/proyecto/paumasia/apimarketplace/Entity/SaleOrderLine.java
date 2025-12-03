@@ -37,7 +37,8 @@ public class SaleOrderLine extends BaseModel {
         this.total_price = this.quantity * (this.product_id.getPrice() * (1 - (this.line_discount / 100f)));
     }
 
-    public void create_account_line(){
-        AccountMoveLine nueva_linea = new AccountMoveLine(this);
+    public AccountMoveLine create_account_line(){
+        return new AccountMoveLine(this);
+
     }
 }

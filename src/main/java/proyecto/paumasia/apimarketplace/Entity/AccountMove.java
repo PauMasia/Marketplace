@@ -34,8 +34,17 @@ public class AccountMove extends BaseModel {
     @Column(nullable = false) //Total con todo
     private Float amount_total;
 //    private String state; // Esta no hara falta, no es una mayorista payed, waiting, lo he puesto en pedidos para saber cuando crear factura o no
-    public AccountMove(ResPartner create_uid) {
-        super(create_uid);
+    public AccountMove(ResPartner create_uid, String name, ResPartner partner_id, String shipping_location, SaleOrder order_id, List<AccountMoveLine> line_ids, Float amount_untaxed, Float amount_tax, Float amount_delivery, Float amount_total) {
+        super(null);
+        this.name = name;
+        this.partner_id = partner_id;
+        this.shipping_location = shipping_location;
+        this.order_id = order_id;
+        this.line_ids = line_ids;
+        this.amount_untaxed = amount_untaxed;
+        this.amount_tax = amount_tax;
+        this.amount_delivery = amount_delivery;
+        this.amount_total = amount_total;
     }
 
     public AccountMove() {

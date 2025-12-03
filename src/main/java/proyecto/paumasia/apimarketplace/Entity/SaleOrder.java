@@ -7,7 +7,7 @@ import org.thymeleaf.expression.Lists;
 import proyecto.paumasia.apimarketplace.BaseModel;
 
 import java.util.List;
-//Se aplican los impuestos a el envio o es antes
+//Se aplican los impuestos a el envio o es antes, croe que antes
 @Entity
 @Table(name ="sale_order")
 @Getter
@@ -22,7 +22,7 @@ public class SaleOrder extends BaseModel {
     @OneToMany(mappedBy = "order_id", cascade = CascadeType.ALL, orphanRemoval = true) // Para que se borren cuando se suelten de este pedido
     private List<SaleOrderLine> line_ids;
     @Column(nullable = false)
-    private String location_id;
+    private String location_id; // delivery_location
     @Column(nullable = false)//total sin impuestos
     private Float amount_untaxed;
     @Column(nullable = false)//impuestoa
@@ -41,7 +41,7 @@ public class SaleOrder extends BaseModel {
     // cOmputar todos los valores precio no nullable, either 0
     // public
     public void compute_amount_total(){
-        if( state == "not_payed") {
+        if( this.state.equals("not_payed")) {
             this.compute_lines();
         }
     }
@@ -49,14 +49,17 @@ public class SaleOrder extends BaseModel {
     public void order_payed(String delivery_location){
     // Aqui se comprobaria que el pago esta realizado realmente
     // no se van a añadir tablas para esto, por el momento
-        if( state == "not_payed") {
-            List<AccountMoveLine>  created_move_line = List.of();
+        if( this.state.equals("not_payed")) {
+            List<AccountMoveLine>  created_move_lines = List.of();
             this.compute_lines();
             // Crear lineas
             for ( SaleOrderLine line : line_ids){
-                line.create_account_line();
+                created_move_lines.add(line.create_account_line());
             }
+            this.createAccountMove(created_move_lines);
+
             this.state = "payed";
+            // aqui ahora tendremos que
         }
     }
 
@@ -64,5 +67,21 @@ public class SaleOrder extends BaseModel {
         for ( SaleOrderLine line : line_ids){
             line.compute_total_price();
         }
+    }
+
+    public void createAccountMove(List<AccountMoveLine> moveLines){
+        AccountMove move = new AccountMove(
+                null,
+                this.name,
+                this.partner_id,
+                this.location_id,
+                this,
+                moveLines,
+                this.amount_untaxed,
+                this.amount_tax,
+                this.amount_delivery,
+                this.amount_total
+        );
+        //no hara falta retornarlo por ahora
     }
 }

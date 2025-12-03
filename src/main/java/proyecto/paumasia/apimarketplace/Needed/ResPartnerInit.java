@@ -25,4 +25,28 @@ public class ResPartnerInit {
             }
         };
     }
+//
+//    @Bean
+//    CommandLineRunner setUpSharedField(ResPartnerRepository userRepository, PasswordEncoder passwordEncoder) {
+//        try{
+//
+//            return args -> {
+//            //Funcion para añadir un campo nuevo en RPartner
+//            // Tener en cuenta si tiene el campo ya establecido a futuro
+//                if (!userRepository.findAll().isEmpty()) {
+//                    for (ResPartner user: userRepository.findAll()){
+//                        user.setShared(Boolean.FALSE);
+//                        if (user.getId() == 1) {
+//                            user.setShared(Boolean.TRUE);
+//                        }
+//                        userRepository.save(user);}
+//                    System.out.println("Usuarios actualizados");
+//                }
+//        };
+//    } catch (Exception e) {
+//            System.out.println("No se han podido actualizar los registros");
+//        }
+//        return null;
+//    }
+
 }

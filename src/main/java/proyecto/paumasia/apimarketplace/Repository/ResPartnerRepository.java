@@ -19,5 +19,10 @@ public interface ResPartnerRepository extends JpaRepository<ResPartner,Long> {
     @Override // revisar funcionamiento
     Page<ResPartner> findAll(Pageable pageable);
 
+    Page<ResPartner> findByUsername(String username,
+                                    Pageable pageable);
+
+//    Page<ResPartner> findAll(String username, Pageable pageable);
+
 //    Page<ResPartner> findByNameContainingIgnoreCase(String username, Pageable pageable);
 }

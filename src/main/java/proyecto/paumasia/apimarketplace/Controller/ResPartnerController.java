@@ -3,6 +3,9 @@ package proyecto.paumasia.apimarketplace.Controller;
 import jakarta.validation.ConstraintDeclarationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +13,8 @@ import proyecto.paumasia.apimarketplace.Entity.ResPartner;
 import proyecto.paumasia.apimarketplace.Models.ResPartnerModel;
 import proyecto.paumasia.apimarketplace.Models.ResponseResPartnerModel;
 import proyecto.paumasia.apimarketplace.Repository.ResPartnerRepository;
+
+import java.util.List;
 
 @Controller
 @RestController
@@ -29,8 +34,9 @@ public class ResPartnerController {
         ResPartner resPartner = new ResPartner();
         try {
             resPartner.setMail(resPartnerModel.getMail());
-            resPartner.setUsername(resPartnerModel.getUsername());
+            resPartner.setUsername(resPartnerModel.getUsername().toLowerCase());
             resPartner.setPassword(passwordEncoder.encode(resPartnerModel.getPassword())); //Dios que calidad
+            resPartner.setShared(true);
             resPartnerRepository.save(resPartner);
         }catch (ConstraintDeclarationException a){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseResPartnerModel("Jaimito no va ♥",resPartner));
@@ -43,36 +49,20 @@ public class ResPartnerController {
 
     @CrossOrigin
     @PostMapping("/login")
-    public ResponseEntity<ResponseResPartnerModel> loginUser(@RequestBody ResPartnerModel resPartnerModel){
+    public ResponseEntity<ResponseResPartnerModel> loginUser(@RequestBody ResPartnerModel resPartnerModel) {
+
         ResPartner resPartner = resPartnerRepository.findByMail(resPartnerModel.getMail());
         if (resPartner == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new ResponseResPartnerModel("Usuario no encontrado", null));
         }
 
-        try {
-            // Comprobar contraseña correctamente
-            if (!passwordEncoder.matches(resPartnerModel.getPassword(), resPartner.getPassword())) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(new ResponseResPartnerModel("Contraseña incorrecta", null));
-            }
-
-            // Generar JWT, revisar
-            // String token = jwtUtil.generateToken(resPartner.getMail());
-            //
-            // revisar
-            //
-            // return ResponseEntity.ok(
-            //         new ResponseResPartnerModel("Login correcto", resPartner, token)
-            // );
-
-        }catch (ConstraintDeclarationException a){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseResPartnerModel("Jaimito no va ♥",resPartner));
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseResPartnerModel(e.getMessage(),resPartner));
+        if (!passwordEncoder.matches(resPartnerModel.getPassword(), resPartner.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new ResponseResPartnerModel("Contraseña incorrecta", resPartner));
         }
-        return ResponseEntity.ok(new ResponseResPartnerModel("Usuario registrado con exito",resPartner));
+
+        return ResponseEntity.ok(new ResponseResPartnerModel("Login correcto",resPartner ));
     }
 
 

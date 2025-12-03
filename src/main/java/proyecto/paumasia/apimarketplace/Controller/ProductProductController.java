@@ -58,4 +58,29 @@ public class ProductProductController {
         return productProductRepository.saveAll(products);
     }
 
+//    // Editar el rpoducto
+    @PutMapping("/{id}")
+    public String updateProduct(@PathVariable Long id, @RequestBody ProductProduct data) {
+    // token y comprobar el campo is share y si es false podra cambiar
+         ProductProduct pproduct= productProductRepository.getReferenceById(id);
+         pproduct.setName(data.getName());
+         pproduct.setCategory(data.getCategory());
+         pproduct.setDiscount(data.getDiscount());
+         pproduct.setPrice(data.getPrice());
+         pproduct.setIs_published(data.getIs_published());
+         pproduct.setResponsible_id(data.getResponsible_id());
+         productProductRepository.save(pproduct);
+        return "Producto actualizado";
+    }
+
+
+    @DeleteMapping("/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        if (!productProductRepository.existsById(id))
+            return "No se ha podido borrar el producto";
+
+        productProductRepository.deleteById(id);
+        return ("Producto eliminado");
+    }
+
 }
